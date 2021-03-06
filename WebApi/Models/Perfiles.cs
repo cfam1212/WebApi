@@ -12,26 +12,22 @@ namespace WebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Perfil
+    public partial class Perfiles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Perfil()
+        public Perfiles()
         {
-            this.Tbl_User = new HashSet<Tbl_User>();
+            this.Usuarios = new HashSet<Usuarios>();
         }
     
-        public int PerfilId { get; set; }
-        public string Perfil_Name { get; set; }
-        public bool Perfil_Estado { get; set; }
-        public string Perfil_Auxv1 { get; set; }
-        public string Perfil_Auxv2 { get; set; }
-        public string Perfil_Auxv3 { get; set; }
-        public Nullable<int> Perfil_Auxi1 { get; set; }
-        public Nullable<int> Perfil_Auxi2 { get; set; }
-        public Nullable<int> Perfil_Auxi3 { get; set; }
-        public System.DateTime Perfil_fechacreacion { get; set; }
+        public int id_perfil { get; set; }
+        public string nombre_perfil { get; set; }
+        public bool estado_perfil { get; set; }
+        public Nullable<int> aux_peri { get; set; }
+        public string aux_perii { get; set; }
+        public System.DateTime creacion_perfil { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_User> Tbl_User { get; set; }
+        public virtual ICollection<Usuarios> Usuarios { get; set; }
     }
 }

@@ -165,34 +165,70 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Tbl_UserController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\OrdenesTrabajoesController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelOrdenTrabajo.Context.cs">
+    <Compile Include="Models\CabeceraEquipos.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clientes.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleEquipos.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equipos.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloOrdenTrabajo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelOrdenTrabajo.Context.tt</DependentUpon>
+      <DependentUpon>ModeloOrdenTrabajo.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelOrdenTrabajo.cs">
+    <Compile Include="Models\ModeloOrdenTrabajo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelOrdenTrabajo.tt</DependentUpon>
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelOrdenTrabajo.Designer.cs">
+    <Compile Include="Models\ModeloOrdenTrabajo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelOrdenTrabajo.edmx</DependentUpon>
+      <DependentUpon>ModeloOrdenTrabajo.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tbl_Perfil.cs">
-      <DependentUpon>ModelOrdenTrabajo.tt</DependentUpon>
+    <Compile Include="Models\Orden.cs" />
+    <Compile Include="Models\OrdenesTrabajo.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tbl_User.cs">
-      <DependentUpon>ModelOrdenTrabajo.tt</DependentUpon>
+    <Compile Include="Models\Perfiles.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Models\sp_ConsultaDatos_Result.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetListaTrabajo_Result.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetOrdenesPorTecnico_Result.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetOrdenesPorTecnico_Result1.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetOrdenesPorTecnico_Result2.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetParametrosGene_Result.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetParametrosGene_Result1.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Usuarios.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,15 +240,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ModelOrdenTrabajo.Context.tt">
+    <Content Include="Models\ModeloOrdenTrabajo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelOrdenTrabajo.Context.cs</LastGenOutput>
-      <DependentUpon>ModelOrdenTrabajo.edmx</DependentUpon>
+      <DependentUpon>ModeloOrdenTrabajo.edmx</DependentUpon>
+      <LastGenOutput>ModeloOrdenTrabajo.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelOrdenTrabajo.tt">
+    <Content Include="Models\ModeloOrdenTrabajo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelOrdenTrabajo.edmx</DependentUpon>
-      <LastGenOutput>ModelOrdenTrabajo.cs</LastGenOutput>
+      <DependentUpon>ModeloOrdenTrabajo.edmx</DependentUpon>
+      <LastGenOutput>ModeloOrdenTrabajo.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -235,12 +271,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\ModelOrdenTrabajo.edmx">
+    <EntityDeploy Include="Models\ModeloOrdenTrabajo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelOrdenTrabajo.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModeloOrdenTrabajo.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ModelOrdenTrabajo.edmx.diagram">
-      <DependentUpon>ModelOrdenTrabajo.edmx</DependentUpon>
+    <Content Include="Models\ModeloOrdenTrabajo.edmx.diagram">
+      <DependentUpon>ModeloOrdenTrabajo.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -265,7 +301,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Usuarios\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

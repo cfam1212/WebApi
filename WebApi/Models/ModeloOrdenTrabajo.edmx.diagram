@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ab2496bac1404616bd5c46a81019df10" Name="Diagram1">
+        <EntityTypeShape EntityType="BDD_HRVModel.Perfiles" Width="1.5" PointX="0.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_HRVModel.Usuarios" Width="1.5" PointX="2.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="BDD_HRVModel.FK_Usuarios_Perfiles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDD_HRVModel.OrdenesTrabajo" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDD_HRVModel.Equipos" Width="1.5" PointX="6.75" PointY="1.125" />
+        <AssociationConnector Association="BDD_HRVModel.FK_OdenesTrabajo_Equipos" />
+        <EntityTypeShape EntityType="BDD_HRVModel.Clientes" Width="1.5" PointX="8.5" PointY="1.125" />
+        <AssociationConnector Association="BDD_HRVModel.FK_Equipos_Clientes" />
+        <EntityTypeShape EntityType="BDD_HRVModel.CabeceraEquipos" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="BDD_HRVModel.DetalleEquipos" Width="1.5" PointX="3" PointY="7.625" />
+        <AssociationConnector Association="BDD_HRVModel.FK_DetalleEquipos_CabeceraEquipos" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
