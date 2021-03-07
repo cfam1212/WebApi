@@ -105,6 +105,16 @@
           <Property Name="orden_auxvar" Type="varchar" MaxLength="50" />
           <Property Name="orden_auxint" Type="int" />
         </EntityType>
+        <EntityType Name="OrdenesTrabajoDetalle">
+          <Key>
+            <PropertyRef Name="id_ordendetalle" />
+          </Key>
+          <Property Name="id_ordendetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_orden" Type="int" Nullable="false" />
+          <Property Name="id_listatrabajo" Type="int" Nullable="false" />
+          <Property Name="auxv_ordendetalle" Type="varchar" MaxLength="50" />
+          <Property Name="auxi_ordendetalle" Type="int" />
+        </EntityType>
         <EntityType Name="Perfiles">
           <Key>
             <PropertyRef Name="id_perfil" />
@@ -168,6 +178,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrdenesTrabajoDetalle_OrdenesTrabajo">
+          <End Role="OrdenesTrabajo" Type="Self.OrdenesTrabajo" Multiplicity="1" />
+          <End Role="OrdenesTrabajoDetalle" Type="Self.OrdenesTrabajoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenesTrabajo">
+              <PropertyRef Name="id_orden" />
+            </Principal>
+            <Dependent Role="OrdenesTrabajoDetalle">
+              <PropertyRef Name="id_orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Perfiles">
           <End Role="Perfiles" Type="Self.Perfiles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -212,6 +234,7 @@
           <EntitySet Name="DetalleEquipos" EntityType="Self.DetalleEquipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesTrabajoDetalle" EntityType="Self.OrdenesTrabajoDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DetalleEquipos_CabeceraEquipos" Association="Self.FK_DetalleEquipos_CabeceraEquipos">
@@ -225,6 +248,10 @@
           <AssociationSet Name="FK_OdenesTrabajo_Equipos" Association="Self.FK_OdenesTrabajo_Equipos">
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="OrdenesTrabajo" EntitySet="OrdenesTrabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesTrabajoDetalle_OrdenesTrabajo" Association="Self.FK_OrdenesTrabajoDetalle_OrdenesTrabajo">
+            <End Role="OrdenesTrabajo" EntitySet="OrdenesTrabajo" />
+            <End Role="OrdenesTrabajoDetalle" EntitySet="OrdenesTrabajoDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Perfiles" Association="Self.FK_Usuarios_Perfiles">
             <End Role="Perfiles" EntitySet="Perfiles" />
@@ -319,7 +346,12 @@
             <Parameter Name="in_auxi1" Mode="In" Type="Int32" />
             <Parameter Name="in_auxi2" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="FunGetListaTrabajo" ReturnType="Collection(BDD_HRVModel.sp_GetListaTrabajo_Result)">
+          <EntitySet Name="OrdenesTrabajoDetalle" EntityType="BDD_HRVModel.OrdenesTrabajoDetalle" />
+          <AssociationSet Name="FK_OrdenesTrabajoDetalle_OrdenesTrabajo" Association="BDD_HRVModel.FK_OrdenesTrabajoDetalle_OrdenesTrabajo">
+            <End Role="OrdenesTrabajo" EntitySet="OrdenesTrabajo" />
+            <End Role="OrdenesTrabajoDetalle" EntitySet="OrdenesTrabajoDetalle" />
+          </AssociationSet>
+          <FunctionImport Name="FunGetListaTrabajo" ReturnType="Collection(BDD_HRVModel.sp_GetListaTrabajo_Result1)">
             <Parameter Name="in_tipo" Mode="In" Type="Int32" />
             <Parameter Name="in_auxv1" Mode="In" Type="String" />
             <Parameter Name="in_auxv2" Mode="In" Type="String" />
@@ -350,6 +382,7 @@
           <Property Name="orden_auxvar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="orden_auxint" Type="Int32" />
           <NavigationProperty Name="Equipos" Relationship="BDD_HRVModel.FK_OdenesTrabajo_Equipos" FromRole="OrdenesTrabajo" ToRole="Equipos" />
+          <NavigationProperty Name="OrdenesTrabajoDetalle" Relationship="BDD_HRVModel.FK_OrdenesTrabajoDetalle_OrdenesTrabajo" FromRole="OrdenesTrabajo" ToRole="OrdenesTrabajoDetalle" />
         </EntityType>
         <EntityType Name="Equipos">
           <Key>
@@ -560,6 +593,33 @@
           <Property Type="String" Name="DetalleTrabajo" Nullable="true" MaxLength="100" />
           <Property Type="Boolean" Name="CheckList" Nullable="true" />
         </ComplexType>
+        <EntityType Name="OrdenesTrabajoDetalle">
+          <Key>
+            <PropertyRef Name="id_ordendetalle" />
+          </Key>
+          <Property Name="id_ordendetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_orden" Type="Int32" Nullable="false" />
+          <Property Name="id_listatrabajo" Type="Int32" Nullable="false" />
+          <Property Name="auxv_ordendetalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="auxi_ordendetalle" Type="Int32" />
+          <NavigationProperty Name="OrdenesTrabajo" Relationship="BDD_HRVModel.FK_OrdenesTrabajoDetalle_OrdenesTrabajo" FromRole="OrdenesTrabajoDetalle" ToRole="OrdenesTrabajo" />
+        </EntityType>
+        <Association Name="FK_OrdenesTrabajoDetalle_OrdenesTrabajo">
+          <End Type="BDD_HRVModel.OrdenesTrabajo" Role="OrdenesTrabajo" Multiplicity="1" />
+          <End Type="BDD_HRVModel.OrdenesTrabajoDetalle" Role="OrdenesTrabajoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenesTrabajo">
+              <PropertyRef Name="id_orden" />
+            </Principal>
+            <Dependent Role="OrdenesTrabajoDetalle">
+              <PropertyRef Name="id_orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetListaTrabajo_Result1">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="DetalleTrabajo" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -742,12 +802,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="OrdenesTrabajoDetalle">
+            <EntityTypeMapping TypeName="BDD_HRVModel.OrdenesTrabajoDetalle">
+              <MappingFragment StoreEntitySet="OrdenesTrabajoDetalle">
+                <ScalarProperty Name="auxi_ordendetalle" ColumnName="auxi_ordendetalle" />
+                <ScalarProperty Name="auxv_ordendetalle" ColumnName="auxv_ordendetalle" />
+                <ScalarProperty Name="id_listatrabajo" ColumnName="id_listatrabajo" />
+                <ScalarProperty Name="id_orden" ColumnName="id_orden" />
+                <ScalarProperty Name="id_ordendetalle" ColumnName="id_ordendetalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="FunGetListaTrabajo" FunctionName="BDD_HRVModel.Store.sp_GetListaTrabajo">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="BDD_HRVModel.sp_GetListaTrabajo_Result">
+              <ComplexTypeMapping TypeName="BDD_HRVModel.sp_GetListaTrabajo_Result1">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DetalleTrabajo" ColumnName="DetalleTrabajo" />
-                <ScalarProperty Name="CheckList" ColumnName="CheckList" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

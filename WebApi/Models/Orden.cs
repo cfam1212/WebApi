@@ -1,4 +1,6 @@
-﻿namespace WebApi.Models
+﻿using System.Collections.Generic;
+
+namespace WebApi.Models
 {
     public class Orden
     {
@@ -27,5 +29,6 @@
         public string RutaImagen { get; set; }
         public string Latitud { get; set; }
         public string Logintud { get; set; }
+        public List<OrdenesTrabajoDetalle> OrdenDetalles { get; set; }
     }
 }

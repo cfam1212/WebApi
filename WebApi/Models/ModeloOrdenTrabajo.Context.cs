@@ -34,6 +34,7 @@ namespace WebApi.Models
         public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<CabeceraEquipos> CabeceraEquipos { get; set; }
         public virtual DbSet<DetalleEquipos> DetalleEquipos { get; set; }
+        public virtual DbSet<OrdenesTrabajoDetalle> OrdenesTrabajoDetalle { get; set; }
     
         public virtual int FunConsultaDatos(Nullable<int> tipo_in1, Nullable<int> tipo_in2, string tipo_var1, string tipo_var2)
         {
@@ -102,7 +103,7 @@ namespace WebApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetParametrosGene_Result1>("FunGetParametrosGene", in_tipoParameter, in_nombreParameter, in_auxv1Parameter, in_auxv2Parameter, in_auxi1Parameter, in_auxi2Parameter);
         }
     
-        public virtual ObjectResult<sp_GetListaTrabajo_Result> FunGetListaTrabajo(Nullable<int> in_tipo, string in_auxv1, string in_auxv2, Nullable<int> in_auxi1, Nullable<int> in_auxi2)
+        public virtual ObjectResult<sp_GetListaTrabajo_Result1> FunGetListaTrabajo(Nullable<int> in_tipo, string in_auxv1, string in_auxv2, Nullable<int> in_auxi1, Nullable<int> in_auxi2)
         {
             var in_tipoParameter = in_tipo.HasValue ?
                 new ObjectParameter("in_tipo", in_tipo) :
@@ -124,7 +125,7 @@ namespace WebApi.Models
                 new ObjectParameter("in_auxi2", in_auxi2) :
                 new ObjectParameter("in_auxi2", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetListaTrabajo_Result>("FunGetListaTrabajo", in_tipoParameter, in_auxv1Parameter, in_auxv2Parameter, in_auxi1Parameter, in_auxi2Parameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetListaTrabajo_Result1>("FunGetListaTrabajo", in_tipoParameter, in_auxv1Parameter, in_auxv2Parameter, in_auxi1Parameter, in_auxi2Parameter);
         }
     }
 }

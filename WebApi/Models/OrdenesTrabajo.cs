@@ -14,6 +14,12 @@ namespace WebApi.Models
     
     public partial class OrdenesTrabajo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public OrdenesTrabajo()
+        {
+            this.OrdenesTrabajoDetalle = new HashSet<OrdenesTrabajoDetalle>();
+        }
+    
         public int id_orden { get; set; }
         public int id_equipo { get; set; }
         public string orden_tipotrabajo { get; set; }
@@ -34,5 +40,7 @@ namespace WebApi.Models
         public Nullable<int> orden_auxint { get; set; }
     
         public virtual Equipos Equipos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdenesTrabajoDetalle> OrdenesTrabajoDetalle { get; set; }
     }
 }

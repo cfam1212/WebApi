@@ -165,11 +165,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdenesTrabajoesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FilesHelper.cs" />
     <Compile Include="Models\CabeceraEquipos.cs">
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
@@ -201,6 +204,9 @@
     <Compile Include="Models\OrdenesTrabajo.cs">
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrdenesTrabajoDetalle.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Perfiles.cs">
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
@@ -208,6 +214,9 @@
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_GetListaTrabajo_Result.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetListaTrabajo_Result1.cs">
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_GetOrdenesPorTecnico_Result.cs">
