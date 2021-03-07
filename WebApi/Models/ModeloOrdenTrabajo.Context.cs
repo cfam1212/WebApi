@@ -57,23 +57,6 @@ namespace WebApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FunConsultaDatos", tipo_in1Parameter, tipo_in2Parameter, tipo_var1Parameter, tipo_var2Parameter);
         }
     
-        public virtual ObjectResult<sp_GetOrdenesPorTecnico_Result2> FunGetOrdenesPorTecnico(Nullable<int> in_tecnico, string in_auxv1, Nullable<int> in_auxi1)
-        {
-            var in_tecnicoParameter = in_tecnico.HasValue ?
-                new ObjectParameter("in_tecnico", in_tecnico) :
-                new ObjectParameter("in_tecnico", typeof(int));
-    
-            var in_auxv1Parameter = in_auxv1 != null ?
-                new ObjectParameter("in_auxv1", in_auxv1) :
-                new ObjectParameter("in_auxv1", typeof(string));
-    
-            var in_auxi1Parameter = in_auxi1.HasValue ?
-                new ObjectParameter("in_auxi1", in_auxi1) :
-                new ObjectParameter("in_auxi1", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetOrdenesPorTecnico_Result2>("FunGetOrdenesPorTecnico", in_tecnicoParameter, in_auxv1Parameter, in_auxi1Parameter);
-        }
-    
         public virtual ObjectResult<sp_GetParametrosGene_Result1> FunGetParametrosGene(Nullable<int> in_tipo, string in_nombre, string in_auxv1, string in_auxv2, Nullable<int> in_auxi1, Nullable<int> in_auxi2)
         {
             var in_tipoParameter = in_tipo.HasValue ?
@@ -126,6 +109,23 @@ namespace WebApi.Models
                 new ObjectParameter("in_auxi2", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetListaTrabajo_Result1>("FunGetListaTrabajo", in_tipoParameter, in_auxv1Parameter, in_auxv2Parameter, in_auxi1Parameter, in_auxi2Parameter);
+        }
+    
+        public virtual ObjectResult<sp_GetOrdenesPorTecnico_Result3> FunGetOrdenesPorTecnico(Nullable<int> in_tecnico, string in_auxv1, Nullable<int> in_auxi1)
+        {
+            var in_tecnicoParameter = in_tecnico.HasValue ?
+                new ObjectParameter("in_tecnico", in_tecnico) :
+                new ObjectParameter("in_tecnico", typeof(int));
+    
+            var in_auxv1Parameter = in_auxv1 != null ?
+                new ObjectParameter("in_auxv1", in_auxv1) :
+                new ObjectParameter("in_auxv1", typeof(string));
+    
+            var in_auxi1Parameter = in_auxi1.HasValue ?
+                new ObjectParameter("in_auxi1", in_auxi1) :
+                new ObjectParameter("in_auxi1", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetOrdenesPorTecnico_Result3>("FunGetOrdenesPorTecnico", in_tecnicoParameter, in_auxv1Parameter, in_auxi1Parameter);
         }
     }
 }

@@ -228,6 +228,9 @@
     <Compile Include="Models\sp_GetOrdenesPorTecnico_Result2.cs">
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_GetOrdenesPorTecnico_Result3.cs">
+      <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_GetParametrosGene_Result.cs">
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
@@ -310,6 +313,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Equipos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

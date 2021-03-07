@@ -333,11 +333,6 @@
             <Parameter Name="tipo_var1" Mode="In" Type="String" />
             <Parameter Name="tipo_var2" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="FunGetOrdenesPorTecnico" ReturnType="Collection(BDD_HRVModel.sp_GetOrdenesPorTecnico_Result2)">
-            <Parameter Name="in_tecnico" Mode="In" Type="Int32" />
-            <Parameter Name="in_auxv1" Mode="In" Type="String" />
-            <Parameter Name="in_auxi1" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="FunGetParametrosGene" ReturnType="Collection(BDD_HRVModel.sp_GetParametrosGene_Result1)">
             <Parameter Name="in_tipo" Mode="In" Type="Int32" />
             <Parameter Name="in_nombre" Mode="In" Type="String" />
@@ -357,6 +352,11 @@
             <Parameter Name="in_auxv2" Mode="In" Type="String" />
             <Parameter Name="in_auxi1" Mode="In" Type="Int32" />
             <Parameter Name="in_auxi2" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FunGetOrdenesPorTecnico" ReturnType="Collection(BDD_HRVModel.sp_GetOrdenesPorTecnico_Result3)">
+            <Parameter Name="in_tecnico" Mode="In" Type="Int32" />
+            <Parameter Name="in_auxv1" Mode="In" Type="String" />
+            <Parameter Name="in_auxi1" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="OrdenesTrabajo">
@@ -620,6 +620,33 @@
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="DetalleTrabajo" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="sp_GetOrdenesPorTecnico_Result3">
+          <Property Type="Int32" Name="IdOrden" Nullable="false" />
+          <Property Type="Int32" Name="IdEquipo" Nullable="false" />
+          <Property Type="String" Name="OrdenEstado" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Cliente" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Contacto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Celular" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="FechaInicioOT" Nullable="true" MaxLength="19" />
+          <Property Type="String" Name="FechaFinalOT" Nullable="true" MaxLength="19" />
+          <Property Type="String" Name="TipoTrabajo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ProblemaEquipo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Notas" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Equipo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MarcaId" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ModeloId" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Voltaje" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Amperaje" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Presion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaInicioTR" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FechaFinalTR" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Observacion" Nullable="false" MaxLength="150" />
+          <Property Type="Binary" Name="ImagenTR" Nullable="true" />
+          <Property Type="String" Name="RutaImagen" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Latitud" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Logintidu" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -762,37 +789,6 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="FunConsultaDatos" FunctionName="BDD_HRVModel.Store.sp_ConsultaDatos">
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="FunGetOrdenesPorTecnico" FunctionName="BDD_HRVModel.Store.sp_GetOrdenesPorTecnico">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BDD_HRVModel.sp_GetOrdenesPorTecnico_Result2">
-                <ScalarProperty Name="IdOrden" ColumnName="IdOrden" />
-                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
-                <ScalarProperty Name="OrdenEstado" ColumnName="OrdenEstado" />
-                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="FechaInicioOT" ColumnName="FechaInicioOT" />
-                <ScalarProperty Name="FechaFinalOT" ColumnName="FechaFinalOT" />
-                <ScalarProperty Name="TipoTrabajo" ColumnName="TipoTrabajo" />
-                <ScalarProperty Name="ProblemaEquipo" ColumnName="ProblemaEquipo" />
-                <ScalarProperty Name="Notas" ColumnName="Notas" />
-                <ScalarProperty Name="Equipo" ColumnName="Equipo" />
-                <ScalarProperty Name="MarcaId" ColumnName="MarcaId" />
-                <ScalarProperty Name="ModeloId" ColumnName="ModeloId" />
-                <ScalarProperty Name="Voltaje" ColumnName="Voltaje" />
-                <ScalarProperty Name="Amperaje" ColumnName="Amperaje" />
-                <ScalarProperty Name="Presion" ColumnName="Presion" />
-                <ScalarProperty Name="FechaInicioTR" ColumnName="FechaInicioTR" />
-                <ScalarProperty Name="FechaFinalTR" ColumnName="FechaFinalTR" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="ImagenTR" ColumnName="ImagenTR" />
-                <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
-                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
-                <ScalarProperty Name="Logintidu" ColumnName="Logintidu" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="FunGetParametrosGene" FunctionName="BDD_HRVModel.Store.sp_GetParametrosGene">
             <ResultMapping>
               <ComplexTypeMapping TypeName="BDD_HRVModel.sp_GetParametrosGene_Result1">
@@ -818,6 +814,37 @@
               <ComplexTypeMapping TypeName="BDD_HRVModel.sp_GetListaTrabajo_Result1">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DetalleTrabajo" ColumnName="DetalleTrabajo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FunGetOrdenesPorTecnico" FunctionName="BDD_HRVModel.Store.sp_GetOrdenesPorTecnico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDD_HRVModel.sp_GetOrdenesPorTecnico_Result3">
+                <ScalarProperty Name="IdOrden" ColumnName="IdOrden" />
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+                <ScalarProperty Name="OrdenEstado" ColumnName="OrdenEstado" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="FechaInicioOT" ColumnName="FechaInicioOT" />
+                <ScalarProperty Name="FechaFinalOT" ColumnName="FechaFinalOT" />
+                <ScalarProperty Name="TipoTrabajo" ColumnName="TipoTrabajo" />
+                <ScalarProperty Name="ProblemaEquipo" ColumnName="ProblemaEquipo" />
+                <ScalarProperty Name="Notas" ColumnName="Notas" />
+                <ScalarProperty Name="Equipo" ColumnName="Equipo" />
+                <ScalarProperty Name="MarcaId" ColumnName="MarcaId" />
+                <ScalarProperty Name="ModeloId" ColumnName="ModeloId" />
+                <ScalarProperty Name="Voltaje" ColumnName="Voltaje" />
+                <ScalarProperty Name="Amperaje" ColumnName="Amperaje" />
+                <ScalarProperty Name="Presion" ColumnName="Presion" />
+                <ScalarProperty Name="FechaInicioTR" ColumnName="FechaInicioTR" />
+                <ScalarProperty Name="FechaFinalTR" ColumnName="FechaFinalTR" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="ImagenTR" ColumnName="ImagenTR" />
+                <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Logintidu" ColumnName="Logintidu" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -21,14 +21,14 @@
         [Route("api/ordenes/{tecnico}")]
         public HttpResponseMessage GetOrdenes(int tecnico)
         {
-            db.Configuration.LazyLoadingEnabled = false;
+            //db.Configuration.LazyLoadingEnabled = false;
 
             try
             {
                 var result = db.FunGetOrdenesPorTecnico(tecnico, string.Empty, 0);
 
                 db = new BDD_HRVEntities();
-                db.FunConsultaDatos(2, tecnico, string.Empty, string.Empty);                
+                db.FunConsultaDatos(2, tecnico, string.Empty, string.Empty);
 
                 return Request.CreateResponse(HttpStatusCode.OK, result);
             }
@@ -109,7 +109,7 @@
 
                 if (_originalcabecera.orden_imagentr != null && _originalcabecera.orden_imagentr.Length > 0)
                 {
-                    _carpeta = @"~/Content/Equipos";
+                    _carpeta = @"~/Content/Equipos/";
 
                     if (!Directory.Exists(_carpeta))
                     {
@@ -143,6 +143,8 @@
                 foreach (OrdenesTrabajoDetalle _detalletrabajo in ordencabedeta.OrdenDetalles)
                 {
                     //if (_detalletrabajo.id_listatrabajo == 0) db.Entry(detail).State = EntityState.Added;
+                    _detalletrabajo.auxi_ordendetalle = 0;
+                    _detalletrabajo.auxv_ordendetalle = string.Empty;
                     db.Entry(_detalletrabajo).State = EntityState.Added;
                 }
 
