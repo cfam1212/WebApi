@@ -19,7 +19,6 @@
 
             return pic;
         }
-
         public static bool UploadPhoto(MemoryStream stream, string folder, string name)
         {
             try

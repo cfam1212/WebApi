@@ -101,13 +101,13 @@
                 _originalcabecera.orden_fechafintr = DateTime.ParseExact(ordencabedeta.FechaFinalTR,
                     "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                 _originalcabecera.orden_observaciontr = ordencabedeta.Observacion.ToUpper();
-                _originalcabecera.orden_imagentr = ordencabedeta.ImagenTR;
+                //_originalcabecera.orden_imagentr = ordencabedeta.ImagenTR;
                 _originalcabecera.orden_longitud = ordencabedeta.Logintud;
                 _originalcabecera.orden_latitud = ordencabedeta.Latitud;
                 _originalcabecera.orden_auxvar = string.Empty;
                 _originalcabecera.orden_auxint = 0;
 
-                if (_originalcabecera.orden_imagentr != null && _originalcabecera.orden_imagentr.Length > 0)
+                if (ordencabedeta.ImagenTR != null && ordencabedeta.ImagenTR.Length > 0)
                 {
                     _carpeta = @"~/Content/Equipos/";
 
@@ -116,8 +116,8 @@
                         Directory.CreateDirectory(_carpeta);
                     }
 
-                    _nombrearchivo = string.Format("{0}.jpg", ordencabedeta.Equipo + "_" + ordencabedeta.IdOrden.ToString());
-                    var _stream = new MemoryStream(_originalcabecera.orden_imagentr);
+                    _nombrearchivo = string.Format("{0}.jpg", DateTime.Now.ToString("ddMMyyyyHHmmss"));
+                    var _stream = new MemoryStream(ordencabedeta.ImagenTR);
                     var _response = FilesHelper.UploadPhoto(_stream, _carpeta, _nombrearchivo);
 
                     _rutaimagen = @"http://localhost:44323/Content/Equipos/" + _nombrearchivo;

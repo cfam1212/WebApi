@@ -237,6 +237,7 @@
     <Compile Include="Models\sp_GetParametrosGene_Result1.cs">
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserApi.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Usuarios.cs">
       <DependentUpon>ModeloOrdenTrabajo.tt</DependentUpon>
@@ -314,6 +315,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Equipos\" />
+    <Folder Include="Content\PhotoUser\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
