@@ -3,10 +3,8 @@
     using Helpers;
     using Newtonsoft.Json.Linq;
     using System;
-    using System.Collections.Generic;
     using System.Data;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
     using System.IO;
     using System.Linq;
     using System.Net;
@@ -18,10 +16,11 @@
 
     public class UsuariosController : ApiController
     {
-        private BDD_HRVEntities db = new BDD_HRVEntities();
+        #region Variables
+        private BDD_HRVEntities db = new BDD_HRVEntities(); 
+        #endregion
 
-        // GET: api/Usuarios
-
+        #region Metodos
         [HttpGet]
         [Route("api/login/{username}/{password}")]
         public HttpResponseMessage GetLogin(string username, string password)
@@ -112,9 +111,8 @@
         public async Task<IHttpActionResult> GetUser(JObject usermodel)
         {
             int userid = 0;
-            dynamic jsonObject = usermodel;            
+            dynamic jsonObject = usermodel;
             //dynamic data = JObject.Parse(usermodel);
-
             try
             {
                 userid = usermodel["UserId"].Value<int>();
@@ -124,8 +122,6 @@
                 return BadRequest("Missing parameter..!");
                 throw;
             }
-
-            //var user = await db.SEGURIDAD_USUARIO.Where(u => u.usua_login.ToLower() == login.ToLower()).FirstOrDefaultAsync();
             var user = await db.Usuarios.AsNoTracking().Where(u => u.id_usuario == userid).FirstOrDefaultAsync();
 
             if (user == null)
@@ -145,52 +141,40 @@
             return Ok(_usuario);
         }
 
-        // POST: api/Usuarios
-        [ResponseType(typeof(Usuarios))]
-        public IHttpActionResult PostUsuarios(Usuarios usuarios)
+        [HttpPost]
+        [Route("api/CambiarPassWord")]
+        public async Task<IHttpActionResult> ChangePassword(JObject passwordmodel)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Usuarios.Add(usuarios);
+            int userid = 0;
+            var nuevopassword = string.Empty;
+            dynamic jsonObject = passwordmodel;
 
             try
             {
-                db.SaveChanges();
+                userid = passwordmodel["UserId"].Value<int>();
+                nuevopassword = jsonObject.NuevoPassword.Value;
             }
-            catch (DbUpdateException)
+            catch
             {
-                if (UsuariosExists(usuarios.login_usuario))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("Jason Icorrecto..!");
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = usuarios.login_usuario }, usuarios);
-        }
+            var user = await db.Usuarios.AsNoTracking().Where(u => u.id_usuario == userid).FirstOrDefaultAsync();
 
-        // DELETE: api/Usuarios/5
-        [ResponseType(typeof(Usuarios))]
-        public IHttpActionResult DeleteUsuarios(string id)
-        {
-            Usuarios usuarios = db.Usuarios.Find(id);
-            if (usuarios == null)
+            if (user == null)
             {
-                return NotFound();
+                return BadRequest("No Existen Datos");
             }
 
-            db.Usuarios.Remove(usuarios);
-            db.SaveChanges();
+            db.Usuarios.Attach(user);
+            user.password_usuario = nuevopassword;
+            await db.SaveChangesAsync();
 
-            return Ok(usuarios);
+            return Ok("OK");
         }
+        #endregion
 
+        #region Disponsed
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -203,6 +187,7 @@
         private bool UsuariosExists(string id)
         {
             return db.Usuarios.Count(e => e.login_usuario == id) > 0;
-        }
+        } 
+        #endregion
     }
 }

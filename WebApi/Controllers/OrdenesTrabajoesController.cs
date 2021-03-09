@@ -14,15 +14,16 @@
 
     public class OrdenesTrabajoesController : ApiController
     {
+        #region Variables
         private BDD_HRVEntities db = new BDD_HRVEntities();
-        string _carpeta, _nombrearchivo, _rutaimagen;
+        string _carpeta, _nombrearchivo, _rutaimagen; 
+        #endregion
 
+        #region Metodos
         [HttpGet]
         [Route("api/ordenes/{tecnico}")]
         public HttpResponseMessage GetOrdenes(int tecnico)
         {
-            //db.Configuration.LazyLoadingEnabled = false;
-
             try
             {
                 var result = db.FunGetOrdenesPorTecnico(tecnico, string.Empty, 0);
@@ -42,7 +43,6 @@
         [Route("api/parametro/{nameparametro}")]
         public HttpResponseMessage GetParametros(string nameparametro)
         {
-            //db.Configuration.LazyLoadingEnabled = false;
             try
             {
                 var result = db.FunGetParametrosGene(0, nameparametro, string.Empty, string.Empty, 0, 0);
@@ -56,11 +56,10 @@
             }
         }
 
-        
-        [Route("api/listatrabajo")]        
+
+        [Route("api/listatrabajo")]
         public HttpResponseMessage GetListaTrabajo()
         {
-            //db.Configuration.LazyLoadingEnabled = false;
             try
             {
                 var result = db.FunGetListaTrabajo(0, string.Empty, string.Empty, 0, 0).ToList();
@@ -80,28 +79,15 @@
         {
             try
             {
-                //db.Configuration.LazyLoadingEnabled = false;
-
-                //ORDEN_TRABAJO_CAB originalorder = await db.ORDEN_TRABAJO_CAB.AsNoTracking().
-                //    Where(o => o.OTCA_CODIGO == datosorder.OtcaCodigo).FirstOrDefaultAsync();
-
                 OrdenesTrabajo _originalcabecera = db.OrdenesTrabajo.Where(o => o.id_orden == ordencabedeta.IdOrden).FirstOrDefault();
-
-                //_emprcodigo = originalorder.empr_codigo;
-                //_clicodigo = originalorder.clie_codigo;
-                //_numot = originalorder.otca_numeroot;
-                //_horafin = datosorder.HoraFinTR;
-                //_tipoot = originalorder.otca_auxv1;
-
                 db.OrdenesTrabajo.Attach(_originalcabecera);
                 _originalcabecera.id_orden = ordencabedeta.IdOrden;
                 _originalcabecera.orden_estado = "FIN";
-                _originalcabecera.orden_fechainiciotr = DateTime.ParseExact(ordencabedeta.FechaInicioTR, 
-                    "dd/MM/yyyy HH:mm:ss",CultureInfo.InvariantCulture);
+                _originalcabecera.orden_fechainiciotr = DateTime.ParseExact(ordencabedeta.FechaInicioTR,
+                    "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                 _originalcabecera.orden_fechafintr = DateTime.ParseExact(ordencabedeta.FechaFinalTR,
                     "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                 _originalcabecera.orden_observaciontr = ordencabedeta.Observacion.ToUpper();
-                //_originalcabecera.orden_imagentr = ordencabedeta.ImagenTR;
                 _originalcabecera.orden_longitud = ordencabedeta.Logintud;
                 _originalcabecera.orden_latitud = ordencabedeta.Latitud;
                 _originalcabecera.orden_auxvar = string.Empty;
@@ -130,9 +116,6 @@
 
                 Equipos _orignalequipos = db.Equipos.Where(e => e.id_equipo == ordencabedeta.IdEquipo).FirstOrDefault();
 
-                //CLIENTES_EQUIPOS_CAB originalequ = await db.CLIENTES_EQUIPOS_CAB.AsNoTracking().
-                //    Where(e => e.CEQU_CODIGO == originalorder.CEQU_CODIGO).FirstOrDefaultAsync();
-
                 db.Equipos.Attach(_orignalequipos);
                 _orignalequipos.marca_quipo = ordencabedeta.MarcaId;
                 _orignalequipos.modelo_equipo = ordencabedeta.ModeloId;
@@ -142,7 +125,6 @@
 
                 foreach (OrdenesTrabajoDetalle _detalletrabajo in ordencabedeta.OrdenDetalles)
                 {
-                    //if (_detalletrabajo.id_listatrabajo == 0) db.Entry(detail).State = EntityState.Added;
                     _detalletrabajo.auxi_ordendetalle = 0;
                     _detalletrabajo.auxv_ordendetalle = string.Empty;
                     db.Entry(_detalletrabajo).State = EntityState.Added;
@@ -150,7 +132,6 @@
 
                 await db.SaveChangesAsync();
 
-                //return CreatedAtRoute("DefaultApi", new { id = original.CEQU_CODIGO }, original);
                 return Ok("OK");
             }
             catch (Exception ex)
@@ -159,6 +140,9 @@
                 throw;
             }
         }
+        #endregion
+
+        #region Disponsed
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -171,6 +155,7 @@
         private bool OrdenesTrabajoExists(int id)
         {
             return db.OrdenesTrabajo.Count(e => e.id_orden == id) > 0;
-        }
+        } 
+        #endregion
     }
 }
