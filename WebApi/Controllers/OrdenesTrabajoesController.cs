@@ -106,7 +106,10 @@
                     var _stream = new MemoryStream(ordencabedeta.ImagenTR);
                     var _response = FilesHelper.UploadPhoto(_stream, _carpeta, _nombrearchivo);
 
+                    //DESARROLLO
                     _rutaimagen = @"http://localhost:44323/Content/Equipos/" + _nombrearchivo;
+                    //LOCAL
+                    //_rutaimagen = @"http://localhost/Content/Equipos/" + _nombrearchivo;
 
                     if (_response)
                     {

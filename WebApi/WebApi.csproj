@@ -291,6 +291,7 @@
     <Content Include="Models\ModeloOrdenTrabajo.edmx.diagram">
       <DependentUpon>ModeloOrdenTrabajo.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\ApiWeb.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
